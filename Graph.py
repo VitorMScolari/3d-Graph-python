@@ -1,14 +1,28 @@
+import random
+from itertools import count
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
 from mpl_toolkits import mplot3d
 
-ax = plt.axes(projection="3d")
+plt.style.use('fivethirtyeight')
 
-z = np.linspace(0, 30, 100)
-x = np.sin(z)
-y = np.cos(z)
+x_vals = []
+y_vals = []
 
 
-ax.plot3D(x,y,z)
+index = count()
 
+
+def animate(i):
+    x_vals.append(next(index))
+    y_vals.append(random.randint(0, 5))
+
+    plt.cla()
+    plt.plot(x_vals, y_vals)
+
+ani = FuncAnimation(plt.gcf(), animate, interval=1000)
+
+
+plt.tight_layout()
 plt.show()
